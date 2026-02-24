@@ -1,6 +1,22 @@
-8. Hexadecimal
-Write a program that prints all the numbers of base 16 in lowercase, followed by a new line.
+#include <stdio.h>
 
-You can only use the putchar function (every other function (printf, puts, etc…) is forbidden)
-All your code should be in the main function
-You can only use putchar three times in your code
+/**
+ * main - Entry point
+ *
+ * Return: Always 0 (Success)
+ */
+int main(void)
+{
+	int n;
+	char c;
+
+	for (n = 0; n < 10; n++)
+		putchar(n + '0');
+
+	for (c = 'a'; c <= 'f'; c++)
+		putchar(c);
+
+	putchar('\n');
+
+	return (0);
+}
