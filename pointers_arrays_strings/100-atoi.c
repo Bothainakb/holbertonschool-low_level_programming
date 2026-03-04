@@ -32,7 +32,8 @@ int _atoi(char *s)
 		i++;
 	}
 
+	/* Avoid negating INT_MIN by casting to int after unsigned accumulation */
 	if (sign == -1)
-		return (-((int)num));
+		return (0 - (int)num);
 	return ((int)num);
 }
