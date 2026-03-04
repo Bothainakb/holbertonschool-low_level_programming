@@ -11,12 +11,10 @@ void rev_string(char *s)
 {
 	int length;
 
-	/* find string length */
 	length = 0;
 	while (s[length] != '\0')
 		length++;
 
-	/* print characters in reverse */
 	while (length > 0)
 	{
 		length--;
