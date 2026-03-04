@@ -1,11 +1,11 @@
-#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 /**
  * puts2 - prints every other character of a string
  * @str: the string to print
  *
- * Description: Starts with the first character and prints
- * every second character followed by a new line.
+ * Description: Uses write instead of putchar.
  */
 void puts2(char *str)
 {
@@ -14,8 +14,8 @@ void puts2(char *str)
     while (str[i] != '\0')
     {
         if (i % 2 == 0)
-            putchar(str[i]);
+            write(1, &str[i], 1);
         i++;
     }
-    putchar('\n');
+    write(1, "\n", 1);
 }
