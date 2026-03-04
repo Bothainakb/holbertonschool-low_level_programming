@@ -2,7 +2,7 @@
 #include <unistd.h>
 
 /**
- * rev_string - prints a string in reverse
+ * rev_string - prints a string in reverse, followed by a new line
  * @s: pointer to the string to be reversed
  *
  * Return: void
@@ -11,12 +11,11 @@ void rev_string(char *s)
 {
 	int length;
 
-	/* find string length */
 	length = 0;
+
 	while (s[length] != '\0')
 		length++;
 
-	/* print characters in reverse */
 	while (length > 0)
 	{
 		length--;
