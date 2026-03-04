@@ -8,7 +8,8 @@
  */
 int _atoi(char *s)
 {
-	int i, sign, num;
+	int i, sign;
+	unsigned int num;
 
 	i = 0;
 	sign = 1;
@@ -32,5 +33,12 @@ int _atoi(char *s)
 		i++;
 	}
 
-	return (num * sign);
+	if (sign == -1 && num > 2147483648)
+		return (-2147483648);
+	if (sign == 1 && num > 2147483647)
+		return (2147483647);
+
+	if (sign == -1)
+		return (-((int)num));
+	return ((int)num);
 }
