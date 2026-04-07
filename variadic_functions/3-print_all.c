@@ -3,42 +3,72 @@
 #include <stdio.h>
 
 /**
+ * print_c - prints a char
+ * @args: argument list
+ */
+void print_c(va_list args)
+{
+	printf("%c", va_arg(args, int));
+}
+
+/**
+ * print_i - prints an int
+ * @args: argument list
+ */
+void print_i(va_list args)
+{
+	printf("%d", va_arg(args, int));
+}
+
+/**
+ * print_f - prints a float
+ * @args: argument list
+ */
+void print_f(va_list args)
+{
+	printf("%f", va_arg(args, double));
+}
+
+/**
+ * print_s - prints a string
+ * @args: argument list
+ */
+void print_s(va_list args)
+{
+	char *s;
+
+	s = va_arg(args, char *);
+	if (s == NULL)
+		s = "(nil)";
+	printf("%s", s);
+}
+
+/**
  * print_all - prints anything
  * @format: list of types of arguments
  */
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	unsigned int i = 0;
+	unsigned int i = 0, j;
 	char *sep = "";
-	char *s;
+	char types[] = {'c', 'i', 'f', 's'};
+	void (*funcs[])(va_list) = {print_c, print_i, print_f, print_s};
 
 	va_start(args, format);
 
 	while (format && format[i])
 	{
-		if (format[i] == 'c')
+		j = 0;
+		while (j < 4)
 		{
-			printf("%s%c", sep, va_arg(args, int));
-			sep = ", ";
-		}
-		if (format[i] == 'i')
-		{
-			printf("%s%d", sep, va_arg(args, int));
-			sep = ", ";
-		}
-		if (format[i] == 'f')
-		{
-			printf("%s%f", sep, va_arg(args, double));
-			sep = ", ";
-		}
-		if (format[i] == 's')
-		{
-			s = va_arg(args, char *);
-			if (s == NULL)
-				s = "(nil)";
-			printf("%s%s", sep, s);
-			sep = ", ";
+			if (format[i] == types[j])
+			{
+				printf("%s", sep);
+				funcs[j](args);
+				sep = ", ";
+			}
+			j++;
 		}
 		i++;
 	}
