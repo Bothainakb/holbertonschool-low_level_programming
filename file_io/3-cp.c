@@ -7,12 +7,12 @@
 #define BUFFER_SIZE 1024
 
 void copy_file(int fd_from, int fd_to, char *file_from, char *file_to);
-void close_fd(int fd, char *buffer, int is_from);
+void close_fd(int fd);
 
 /**
- * main - entry point
+ * main - entry point, copies file content
  * @ac: argument count
- * @av: arguments
+ * @av: argument vector
  *
  * Return: 0 on success
  */
@@ -54,14 +54,20 @@ int main(int ac, char **av)
 	copy_file(fd_from, fd_to, av[1], av[2]);
 
 	free(buffer);
-	close_fd(fd_from, NULL, 0);
-	close_fd(fd_to, NULL, 0);
+	close_fd(fd_from);
+	close_fd(fd_to);
 
 	return (0);
 }
 
 /**
- * copy_file - copies data
+ * copy_file - copies content from one file to another
+ * @fd_from: file descriptor of source file
+ * @fd_to: file descriptor of destination file
+ * @file_from: name of source file
+ * @file_to: name of destination file
+ *
+ * Return: nothing
  */
 void copy_file(int fd_from, int fd_to, char *file_from, char *file_to)
 {
@@ -88,9 +94,12 @@ void copy_file(int fd_from, int fd_to, char *file_from, char *file_to)
 }
 
 /**
- * close_fd - closes file descriptor safely
+ * close_fd - closes a file descriptor safely
+ * @fd: file descriptor to close
+ *
+ * Return: nothing
  */
-void close_fd(int fd, char *buffer, int is_from)
+void close_fd(int fd)
 {
 	int c;
 
@@ -101,7 +110,4 @@ void close_fd(int fd, char *buffer, int is_from)
 			"Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
-
-	if (buffer && is_from)
-		free(buffer);
 }
